@@ -62,7 +62,6 @@
     </div>
     <script>
       function searchTemp() {
-        document.getElementById("allInfo").style.display = "block";
         let nameOfCity = document.getElementById("cityName").value;
         let city = (document.getElementById(
           "city-name"
@@ -100,6 +99,7 @@
             document.getElementById("humidity").innerText = humidity;
             document.getElementById("pressure").innerText = pressure;
           });
+          document.getElementById("allInfo").style.display = "block";
       }
     </script>
   </body>
