@@ -4,12 +4,14 @@ function searchTemp() {
       "city-name"
     ).innerText = nameOfCity);
     const apiKey = "50574e6be07a64acc4b3722383e50e2a";
+    // api.openweathermap.org/data/2.5/weather?q=Dhaka&appid=50574e6be07a64acc4b3722383e50e2a
     fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${city}&&appid=${apiKey}`
+      `api.openweathermap.org/data/2.5/weather?q=${city}&&appid=${apiKey}`
     )
       .then((response) => response.json())
 
       .then((data) => {
+          console.log(data)
         const cityName = data.name;
         const temperature = parseFloat(data.main.temp - 273.15).toFixed(2);
         const temperatureMax = parseFloat(
