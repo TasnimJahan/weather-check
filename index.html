@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Temperature Hot</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background: url(images/bg-image.jpg) no-repeat;
+            background-size: cover;
+            height: 100vh;
+        }
+        #allInfo{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form class="col-md-6 m-auto py-5">
+            <div class="input-group mb-3">
+                <input id="cityName" type="text" class="form-control" placeholder="Enter a location for Weather ...">
+                <div class="input-group-append">
+                    <button onclick="searchTemp()" type="button" class="btn btn-danger">Search</button>
+                </div>
+            </div>
+        </form>
+        <div id="allInfo" class="weather-status text-white text-center">
+            <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
+            <h1><span id="city-name">Dhaka</span>, <span id="country">Country</span> </h1>
+            <h3><span id="temp">38.06</span>&deg;C</h3>
+            <h3><span id="tempMin">38.06</span>&deg;C(min)/<span id="tempMax">38.06</span>&deg;C(max)</h3>
+            <h5>FeelsLike: <span id="feelsLike"></span></h5>
+            <h2 id="weather">Clouds</h2>
+            <h5>Humidity: <span id="humidity"></span>%</h5>
+            <h5>Pressure: <span id="pressure"></span>hPa</h5>
+        </div>
+    </div>
+<script>
+    function searchTemp() {
+        document.getElementById("allInfo").style.display="block"
+        let nameOfCity = document.getElementById("cityName").value;
+        let city= document.getElementById("city-name").innerText=nameOfCity;
+        console.log(city);
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=50574e6be07a64acc4b3722383e50e2a`)
+  .then((response) => response.json())
+  
+  .then((data) => {
+      console.log(data);
+        const cityName= data.name;
+      const temperature= parseFloat(data.main.temp-273.15).toFixed(2);
+      const temperatureMax= parseFloat(data.main.temp_max-273.15).toFixed(2);
+      const temperatureMin= parseFloat(data.main.temp_min-273.15).toFixed(2);
+      const weather=data.weather[0].main;
+      const feelsLike= parseFloat(data.main.feels_like-273.15).toFixed(2);
+      const humidity= parseFloat(data.main.humidity).toFixed(2);
+      const pressure= parseFloat(data.main.pressure).toFixed(2);
+      const country = data.sys.country;
+
+    document.getElementById("city-name").innerText=cityName;
+    document.getElementById("country").innerText=country;
+    document.getElementById("temp").innerText=temperature;
+    document.getElementById("weather").innerText=weather;
+    document.getElementById("tempMax").innerText=temperatureMax;
+    document.getElementById("tempMin").innerText=temperatureMin;
+    document.getElementById("feelsLike").innerText=feelsLike;
+    document.getElementById("humidity").innerText=humidity;
+    document.getElementById("pressure").innerText=pressure;
+  });
+    }
+</script>
+</body>
+
+</html>
