@@ -5,8 +5,8 @@ function searchTemp() {
         ).innerText = nameOfCity);
         const apiKey = "50574e6be07a64acc4b3722383e50e2a";
         fetch(
-          `http://api.openweathermap.org/data/2.5/weather?q=${city}&&appid=${apiKey}`
-        )
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&&appid=${apiKey}`
+        )  
           .then((response) => response.json())
 
           .then((data) => {
